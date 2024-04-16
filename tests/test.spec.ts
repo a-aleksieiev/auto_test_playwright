@@ -35,7 +35,10 @@ test.describe('firstTestSuite', ()=> {
     await page.type("input[type=password]", "1234567");
     await page.click('//*[@id="cdk-overlay-0"]/vd-overlay-modal/div/vd-base-authorization/div[4]/button'); // Змінив селектор тут
     await page.click('//*[@id="cdk-overlay-1"]/vd-overlay-modal/div/vd-choose-profile/div/div/div[1]/div[2]/div/div[1]');
-    await page.click('text=Рекомендації для тебе');
-    await page.click(".absolute.h-full.w-full.top-0.left-0.z-3")
+    await page.click('text=Нове на Київстар ТБ');
+    await page.click('text=Дюна: Частина друга');
+    await page.click('text=Продовжити перегляд');
+    await page.click('.relative.icon-volume');
+    await page.waitForTimeout(3000);
   })
 })
