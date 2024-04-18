@@ -7,7 +7,7 @@ export default defineConfig({
   projects: [
     {
       name: 'My Project', // Choose a descriptive name
-      use: { browserName: 'chromium' }, // Replace with 'firefox' or 'webkit' for different browsers
+      use: { browserName: 'webkit' }, // Replace with 'firefox' or 'webkit' for different browsers
     },
   ],
 });
@@ -19,10 +19,11 @@ test.describe.only('hooks', ()=>{
   test('onlineTv', async ({ page }) => {
     await page.click('.icon-close.text-16');
     await page.click('text=Онлайн ТБ');
+    await page.waitForTimeout(5000);
     await page.click('text=Грати з початку');
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(20000);
     await page.click('text=До прямого ефіру');
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(5000);
   });
 
   test('contentGroupAssetPage', async ({page})=>{
@@ -31,9 +32,12 @@ test.describe.only('hooks', ()=>{
     await page.click('text=Дюна: Частина друга');
     await page.click('text=Продовжити перегляд');
     await page.click('.relative.icon-volume');
+    await page.waitForTimeout(5000);
   })
 
   test('search', async ({page})=>{
+    const channelName = '1+1 Україна HD';
+    const labelLocator = await page.locator(`label:text-is-exact("${channelName}")`);
     await search(page);
     await page.waitForTimeout(2000);
     await page.click('.absolute.h-full.w-full.top-0.left-0.z-3');
@@ -43,7 +47,7 @@ test.describe.only('hooks', ()=>{
     await page.click('.btn.advanced-search.rounded-none.w-full.h-40.absolute.bottom-0.m-0');
     await page.waitForTimeout(2000);
     await page.click('text=Телеканали');
-    await page.click('text="Сніданок з 1+1". Інформаційно-розважальна програма');
+    await page.click('text="Єдині новини". Телемарафон');
     await page.waitForTimeout(2000);
     await page.click('.h-24');
     await search(page);
@@ -72,14 +76,13 @@ test.describe.only('hooks', ()=>{
     }
     await page.click(".checkbox-body");
     await page.click(".ks-btn__primary >> text=Зберегти");
-    // const pin = await page.locator(".typo-subtitle >> text=PIN-код");
-    // if(pin){
-    // await page.click(".ks-btn__ghost >> text=Змінити");
-    // }
-    // await page.type("input[type=password]", "1234");
-    // await page.click(".ks-btn__primary >> text=Зберегти");
-    await page.click("text=Управління профілями");
-    await page.click(".ng-star-inserted");
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(1000);
+    await page.click("text=Ввести промокод");
+    await page.type("input[type=text]", "test04050Reusable");
+    await page.click(".btn__new.btn.btn-primary.form__submit");
+    await page.click("text=Гаразд");
+    await page.click("text= Вийти з Київстар ТБ");
+    await page.click(".ks-btn__primary.w-full.mb-40 >> text= Вийти з Київстар ТБ");
+    await page.waitForTimeout(1000);
   })
 })
