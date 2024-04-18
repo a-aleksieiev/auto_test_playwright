@@ -58,4 +58,28 @@ test.describe.only('hooks', ()=>{
     await page.click('.ks-btn__ghost.ng-star-inserted >> text=Покупка');
     await page.waitForTimeout(2000);
   })
+
+  test('profileEdit', async ({page})=>{
+    await page.click(".w-32.h-32.rounded-full");
+    await page.click("text= Персональні дані");
+    await page.click(".ks-btn__ghost >> text=Редагувати");
+    await page.type("input[type=text]", "t267");
+    await page.click("text=Жінка");
+    await page.click(".ks-btn__primary >> text=Зберегти");
+    const pass = await page.locator(".typo-subtitle >> text=Налаштування пароля");
+    if(pass){
+    await page.click(".ks-btn__ghost >> text=Змінити");
+    }
+    await page.click(".checkbox-body");
+    await page.click(".ks-btn__primary >> text=Зберегти");
+    // const pin = await page.locator(".typo-subtitle >> text=PIN-код");
+    // if(pin){
+    // await page.click(".ks-btn__ghost >> text=Змінити");
+    // }
+    // await page.type("input[type=password]", "1234");
+    // await page.click(".ks-btn__primary >> text=Зберегти");
+    await page.click("text=Управління профілями");
+    await page.click(".ng-star-inserted");
+    await page.waitForTimeout(3000);
+  })
 })
