@@ -20,8 +20,9 @@ test.describe.only('hooks', ()=>{
     await page.click('.icon-close.text-16');
     await page.click('text=Онлайн ТБ');
     await page.click('text=Грати з початку');
+    await page.waitForTimeout(1000);
     await page.click('text=До прямого ефіру');
-    await page.waitForTimeout(10000);
+    await page.waitForTimeout(1000);
   });
 
   test('contentGroupAssetPage', async ({page})=>{
