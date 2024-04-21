@@ -21,7 +21,7 @@ test.describe.only('hooks', ()=>{
     await page.click('text=Онлайн ТБ');
     await page.waitForTimeout(5000);
     await page.click('text=Грати з початку');
-    await page.waitForTimeout(20000);
+    await page.waitForTimeout(5000);
     await page.click('text=До прямого ефіру');
     await page.waitForTimeout(5000);
   });
