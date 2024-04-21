@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { defineConfig } from '@playwright/test';
-import { login, search } from './helpers';
+import { login, search, chips } from './helpers';
 
 
 export default defineConfig({
@@ -30,7 +30,7 @@ test.describe.only('hooks', ()=>{
     await page.click('.icon-close.text-16');
     await page.click('text=Нове на Київстар ТБ');
     await page.click('text=Дюна: Частина друга');
-    await page.click('text=Продовжити перегляд');
+    await page.click('text=Дивитись');
     await page.click('.relative.icon-volume');
     await page.waitForTimeout(5000);
   })
@@ -55,12 +55,7 @@ test.describe.only('hooks', ()=>{
     await page.click('text=Фільтри');
     await page.click('.whitespace-nowrap.ml-8.typo-body.text-gray-300 >> text=Фільми');
     await page.waitForTimeout(3000);
-    await page.click('.ks-btn__ghost >> text=Доступно');
-    await page.waitForTimeout(1000);
-    await page.click('.ks-btn__ghost >> text=За підпискою');
-    await page.waitForTimeout(1000);
-    await page.click('.ks-btn__ghost.ng-star-inserted >> text=Покупка');
-    await page.waitForTimeout(2000);
+    await chips(page);
   })
 
   test('profileEdit', async ({page})=>{
@@ -84,5 +79,19 @@ test.describe.only('hooks', ()=>{
     await page.click("text= Вийти з Київстар ТБ");
     await page.click(".ks-btn__primary.w-full.mb-40 >> text= Вийти з Київстар ТБ");
     await page.waitForTimeout(1000);
+  })
+
+  test('openAdult', async ({page})=>{
+    await page.click(".btn.link.full-height-center >> text=Більше");
+    await page.click("text=Для дорослих");
+    await page.type("input[type=password]", "1234");
+    await page.click("text=Далі");
+    await page.click(".text.chips__item-link.ng-star-inserted >> text=Доступно");
+    await page.waitForTimeout(2000);
+    await page.goBack();
+    await page.click("text=Весела сімейка");
+    await page.click('text=Дивитись');
+    await page.click(".clickable-element.open-popup-btn.relative");
+    await page.waitForTimeout(5000);
   })
 })
