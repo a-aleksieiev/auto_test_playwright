@@ -1,10 +1,10 @@
-const websiteName = 'https://webng.dev.vidmind.com/ua/';
+const websiteName = 'https://tv.kyivstar.ua/ua/';
 export async function loginFTTB(page){
     await page.goto(websiteName);
     await page.click("text=Увійти");
     await page.click("text=Особовий рахунок");
-    await page.type("input[type=text]", "t300");
-    await page.type("input[type=password]", "123456");
+    await page.type("input[type=text]", "demo_alk");
+    await page.type("input[type=password]", "1234567");
     await page.keyboard.press('Enter'); 
     await page.click('//*[@id="cdk-overlay-1"]/vd-overlay-modal/div/vd-choose-profile/div/div/div[1]/div[2]/div/div[1]');
 }
